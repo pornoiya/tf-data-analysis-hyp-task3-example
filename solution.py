@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from statsmodels.stats.weightstats import ztest
+from scipy.stats import mannwhitneyu
 
 chat_id = 146155552 # Ваш chat ID, не меняйте название переменной
 
@@ -10,5 +10,5 @@ def solution(x: np.array) -> bool: # Одна или две выборке на 
     # Не меняйте название функции и её аргументы
     alpha = 0.01
   
-    p = (ztest(x, value = 500,alternative = 'larger')[1])/2
-    return p < alpha # Ваш ответ, True или False
+    pval = mannwhitneyu(x, y, alternative="less").pvalue
+    return pval < alpha
